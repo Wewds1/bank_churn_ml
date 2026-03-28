@@ -1,8 +1,14 @@
-"""Unit tests for data preparation functions."""
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 import pytest
 import numpy as np
 import pandas as pd
 from src.data_prep import parse_income, check_for_leakage, check_duplicates_by_id
+
 
 
 class TestParseIncome:
@@ -51,7 +57,7 @@ class TestLeakageDetection:
         })
         
         results = check_for_leakage(df, 'churned', ['leak_col'])
-        assert results['leak_col']['is_suspicious'] is True
+        assert results['leak_col']['is_suspicious'] == True
     
     def test_non_leak_column(self):
         """Test that non-leak columns pass."""
@@ -61,7 +67,7 @@ class TestLeakageDetection:
         })
         
         results = check_for_leakage(df, 'churned', ['normal_col'])
-        assert results['normal_col']['is_suspicious'] is False
+        assert results['normal_col']['is_suspicious'] == False
 
 
 class TestDuplicateDetection:
