@@ -101,7 +101,7 @@ def export_for_retention_team(results_df, output_path='retention_targets.csv', t
     )
     
     export_df.to_csv(output_path, index=False)
-    print(f"✅ Exported {len(export_df)} customers to {output_path}")
+    print(f"Exported {len(export_df)} customers to {output_path}")
     
     return export_df
 
